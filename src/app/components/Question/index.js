@@ -34,11 +34,17 @@ export class Question extends Component {
   }
 
   getNewQuestion = async () => {
-    await this.props.getRandomQuestion()
-    // setState() after async function, so that new question is
-    // rendered (almost) at the same time that option selections are removed
-    // Asetetaan myös startTime
-    this.setState({ selected: null, startTime: Date.now() })
+    if (!this.props.userAnswer) {
+      // If the question has not been answered
+      this.skipQuestion()
+      // Do nothing else
+    } else {
+      await this.props.getRandomQuestion()
+      // setState() after async function, so that new question is
+      // rendered (almost) at the same time that option selections are removed
+      // Asetetaan myös startTime
+      this.setState({ selected: null, startTime: Date.now() })
+    }
   }
 
   handleConfirm = async () => {
@@ -65,6 +71,12 @@ export class Question extends Component {
     this.setState({ startTime: Date.now(), selected: null })
   }
 
+  skipQuestion = async () => {
+    // Lähetetään vastaus, jossa value = 'Note: questionSkipped'
+    await this.props.answerQuestion(this.props.question.item._id, 'Note: questionSkipped')
+    this.setState({ selected: null })
+  }
+
   render() {
     const { question, userAnswer, questionMessage, game } = this.props
     return (
@@ -72,7 +84,7 @@ export class Question extends Component {
         {userAnswer && this.renderUserAnswer(userAnswer)}
         {!game.started && !questionMessage && (
           <AlertWindow title={'Paina start -nappia saadaksesi kysymyksiä'}>
-            <Button style={{ backgroundColor: 'rgb(68, 255, 0)', color: 'white' }} onClick={this.startGame}>Start</Button>
+            <Button style={{ backgroundColor: 'rgb(51, 204, 51)', color: 'white' }} onClick={this.startGame}>Start</Button>
           </AlertWindow>
         )}
         {questionMessage && (
