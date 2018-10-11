@@ -52,7 +52,7 @@ export class Question extends Component {
 
   renderUserAnswer = (userAnswer) => {
     const { isCorrect, correctAnswer } = userAnswer
-    const message = isCorrect ? 'Correct!' : `Wrong! Correct answer is '${correctAnswer}'`
+    const message = isCorrect ? 'Oikein!' : `Väärin! Oikea vastaus on '${correctAnswer}'`
     return (<AlertWindow title={message} positive={isCorrect} negative={!isCorrect} />)
   }
 
@@ -71,13 +71,13 @@ export class Question extends Component {
       <div className='questionContainer'>
         {userAnswer && this.renderUserAnswer(userAnswer)}
         {!game.started && !questionMessage && (
-          <AlertWindow title={'Press start to get questions'}>
+          <AlertWindow title={'Paina start -nappia saadaksesi kysymyksiä'}>
             <Button style={{ backgroundColor: 'rgb(68, 255, 0)', color: 'white' }} onClick={this.startGame}>Start</Button>
           </AlertWindow>
         )}
         {questionMessage && (
           <AlertWindow title={questionMessage} neutral>
-            <p>New questions will be available soon, all you need to do is wait a few seconds</p>
+            <p>Saat pian uusia kysymyksiä, odota vain muutama sekunti</p>
           </AlertWindow>
         )}
         {game.started && question && question.kind === 'PrintQuestion' && <PrintQuestion question={question.item} handleSelect={this.selectOption} handleConfirm={this.handleConfirm} selected={this.state.selected} />}
