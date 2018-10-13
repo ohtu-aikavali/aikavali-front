@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.1.2",
     "@material-ui/icons": "^3.0.1",
+    "animejs": "^2.2.0",
     "axios": "^0.18.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
@@ -14,7 +15,8 @@
     "react-window-size": "^1.2.2",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
-    "store-js": "^2.0.4"
+    "store-js": "^2.0.4",
+    "typeface-roboto": "0.0.54"
   },
   "scripts": {
     "start": "react-scripts start",
