@@ -9,6 +9,7 @@ import SaveIcon from '@material-ui/icons/Save'
 import AddIcon from '@material-ui/icons/Add'
 import DeleteIcon from '@material-ui/icons/Delete'
 import './admin.css'
+import QuestionFormToast, {openQuestionFormToast} from './QuestionFormToast.js'
 
 import { postCompileQuestion, postPrintQuestion } from '../../reducers/actions/questionActions'
 
@@ -33,6 +34,11 @@ export class QuestionForm extends Component {
       correctAnswer: '',
       incorrectAnswers: ['', '', '']
     }
+  }
+
+  //Show QuestionFormToast
+  showToast = ({ message, type }) => {
+    openQuestionFormToast({ message, type })
   }
 
   //handles change of questionType, question and correctAnswer in state
@@ -64,14 +70,15 @@ export class QuestionForm extends Component {
   }
 
   handleSave = () => {
+
     if (this.state.questionType === '') {
-      console.log('Question Type not set!')
+      this.showToast({message: 'Kysymyksen tyyppiä ei ole asetettu!', type:'error'})
     } else if (this.state.question === '' && this.state.questionType !== 'kääntyy') {
-      console.log('Question is empty!')
+      this.showToast({message: 'Kysymys on tyhjä!', type:'error'})
     } else if (this.state.correctAnswer === '') {
-      console.log('Correct answer is empty')
+      this.showToast({message: 'Oikea vastaus on tyhjä!', type:'error'})
     } else if (this.state.incorrectAnswers.includes('')) {
-      console.log('Atleast one of incorrect answers are empty')
+      this.showToast({message: 'Yksi vääristä vastauksista on tyhjä!', type:'error'})
     } else {
       // If the question is valid
       if (this.state.questionType === 'tulostaa') {
@@ -85,8 +92,7 @@ export class QuestionForm extends Component {
         correctAnswer: '',
         incorrectAnswers: ['', '', '']
       })
-      console.log('Post succesful')
-      this.props.history.push('/admin')
+      this.showToast({message: 'Kysymys tallennettu', type:'success'})
     }
   }
 
@@ -170,6 +176,7 @@ export class QuestionForm extends Component {
             </Button>
           </div>
         </form>
+        <QuestionFormToast/>
       </div>
     )
   }
