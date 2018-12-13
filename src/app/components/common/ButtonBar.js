@@ -4,7 +4,6 @@ import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import SkipNextIcon from '@material-ui/icons/SkipNext'
 import ListAltIcon from '@material-ui/icons/ListAlt'
-import LibraryAddIcon from '@material-ui/icons/LibraryAdd'
 
 export const styles = {
   bottomNav: {
@@ -48,7 +47,6 @@ export class ButtonBar extends Component {
         showLabels
         style={styles.bottomNav}
       >
-        <BottomNavigationAction style={styles.activeButton} label="Lisää kysymys" icon={<LibraryAddIcon style={styles.middleIcon} />} component={Link} to={'/newquestion'} />
         <BottomNavigationAction style={styles.activeButton} label="Kurssit" icon={<ListAltIcon style={styles.middleIcon} />} component={Link} to={'/courses'} />
         <BottomNavigationAction disabled={skipDisabled} style={skipStyle} onClick={this.props.handleSkip} label={skipLabel} icon={<SkipNextIcon style={styles.icon} />} />
       </BottomNavigation>

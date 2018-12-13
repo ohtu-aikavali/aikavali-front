@@ -8,20 +8,8 @@ export const DrawerList = () => {
   return (
     <div className='drawerList'>
       <List>
-        <ListItem button onClick={() => console.log('OHPE')}>
-          <ListItemText primary="OHPE" />
-        </ListItem>
-        <Divider />
-        <ListItem button disabled>
-          <ListItemText primary="OHJA" />
-        </ListItem>
-        <Divider />
-        <ListItem button disabled>
-          <ListItemText primary="TITO" />
-        </ListItem>
-        <Divider />
-        <ListItem button disabled>
-          <ListItemText primary="TIKAPE" />
+        <ListItem button component="a" href="#/newquestion">
+          <ListItemText primary="LISÄÄ KYSYMYS" />
         </ListItem>
         <Divider />
       </List>
